@@ -1,23 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:isango_app/core/theme/app_colors.dart';
 import 'package:isango_app/core/theme/app_spacing.dart';
-import 'package:isango_app/core/theme/app_text_styles.dart';
 
 class AuthScaffold extends StatelessWidget {
-  const AuthScaffold({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    required this.child,
-  });
+  const AuthScaffold({super.key, required this.child});
 
-  final String title;
-  final String subtitle;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.mistBackground,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -26,60 +19,27 @@ class AuthScaffold extends StatelessWidget {
               vertical: AppSpacing.lg,
             ),
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 440),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const _IsangoWordmark(),
-                  const SizedBox(height: AppSpacing.xl),
-                  Text(title, style: AppTextStyles.display),
-                  const SizedBox(height: AppSpacing.xs),
-                  Text(subtitle, style: AppTextStyles.bodyMuted),
-                  const SizedBox(height: AppSpacing.lg),
-                  Container(
-                    padding: const EdgeInsets.all(AppSpacing.lg),
-                    decoration: BoxDecoration(
-                      color: AppColors.cardWhite,
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: AppColors.softBorder),
+              constraints: const BoxConstraints(maxWidth: 420),
+              child: Container(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                decoration: BoxDecoration(
+                  color: AppColors.cardWhite,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: AppColors.softBorder),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Color(0x1A000000),
+                      blurRadius: 12,
+                      offset: Offset(0, 4),
                     ),
-                    child: child,
-                  ),
-                ],
+                  ],
+                ),
+                child: child,
               ),
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class _IsangoWordmark extends StatelessWidget {
-  const _IsangoWordmark();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          width: 36,
-          height: 36,
-          decoration: BoxDecoration(
-            color: AppColors.logisticsNavy,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          alignment: Alignment.center,
-          child: const Icon(
-            Icons.event_available_outlined,
-            color: AppColors.cardWhite,
-            size: 20,
-          ),
-        ),
-        const SizedBox(width: AppSpacing.xs),
-        const Text('Isango', style: AppTextStyles.headline),
-      ],
     );
   }
 }
